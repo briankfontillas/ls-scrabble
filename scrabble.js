@@ -1,12 +1,8 @@
 class Scrabble {
   static POINT_SYSTEM = {
-    one: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
-    two: ['D', 'G'],
-    three: ['B', 'C', 'M', 'P'],
-    four: ['F', 'H', 'V', 'W', 'Y'],
-    five: ['K'],
-    eight: ['J', 'X'],
-    ten: ['Q', 'Z']
+    A : 1, E : 1, I : 1, O : 1, U : 1, L : 1, N : 1, R : 1, S : 1, T : 1,
+    D : 2, G : 2, B : 3, C : 3, M : 3, P : 3, F : 4, H : 4, V : 4, W : 4,
+    Y : 4, K : 5, J : 8, X : 8, Q : 10, Z : 10
   };
 
   constructor(word) {
@@ -19,23 +15,8 @@ class Scrabble {
     const POINTS = Scrabble.POINT_SYSTEM;
 
     return word.toUpperCase().split('').reduce((previous, current) => {
-      if (POINTS.one.includes(current)) {
-        return previous += 1;
-      } else if (POINTS.two.includes(current)) {
-        return previous += 2;
-      } else if (POINTS.three.includes(current)) {
-        return previous += 3;
-      } else if (POINTS.four.includes(current)) {
-        return previous += 4;
-      } else if (POINTS.five.includes(current)) {
-        return previous += 5;
-      } else if (POINTS.eight.includes(current)) {
-        return previous += 8;
-      } else if (POINTS.ten.includes(current)) {
-        return previous += 10;
-      } else {
-        return previous;
-      }
+      if (!Object.keys(POINTS).includes(current)) return previous;
+      return previous += POINTS[current];
     }, 0);
   }
 
